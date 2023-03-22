@@ -103,10 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CORS_ALLOWED_ORIGINS = [
-	"http://127.0.0.1:3000",
-	"http://localhost:3000",
-]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -127,6 +123,34 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# AUTH
+
+AUTH_USER_MODEL = 'notes.note'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+# DRF
+REST_FRAMEWORK = {
+	'DEFAULT_RENDERER_CLASSES':(
+		'djangorestframework_camel_case.render.CamelCaseJSONRender',
+		'djangorestframework_camel_case.render.CamelCaseBrowsabieAPIRenderer',
+	),
+	'DEFAULT_PARSER_CLASSES':(
+		'djangorestframework_camel_case.render.CamelCaseFormParser',
+		'djangorestframework_camel_case.render.CamelCaseMultiPartParser',
+		'djangorestframework_camel_case.render.CamelCaseJSONParser',
+	),
+	
+	'DEFAULT_FILTER_BACKENOS': [django_filters.rest_framework.DjangoFilterBackend'],
+}
+				    
+# CORS				    
+CORS_ALLOWED_ORIGINS = [
+	"http://127.0.0.1:3000",
+	"http://127.0.0.1:37745",
+	"http://localhost:3000",
+	"http://localhost:37745",
+]
+				    
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

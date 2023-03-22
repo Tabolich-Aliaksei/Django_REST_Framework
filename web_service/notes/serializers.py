@@ -1,8 +1,8 @@
-from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import ModelSerializer
 from .models import Note
 
 
-class NoteModelSerializer(HyperlinkedModelSerializer):
+class NoteModelSerializer(ModelSerializer):
     class Meta:
-        model = Note
-        fields = '__all__'
+        model = note
+        fields = ('username', 'first_name', 'last_name', 'email')
