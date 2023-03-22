@@ -9,7 +9,7 @@ import './bootstrap/css/bootstrap.min.css'
 import './bootstrap/css/sticky-footer-navbar.css'
 import Footer from './components/Footer.js'
 import Navbar from './components/Menu.js'
-import UserList from './components/User.js'
+import UserList from './components/Note.js'
 import (ProjectList, ProjectDetail) from './components/Project.js'
 import TodoList from './components/Todo.js'
 import axios from 'axios'
@@ -24,11 +24,11 @@ class App extends  React.Component {
 	    super(props)
 	    this.state = {
 	        navbarItems: [
-		    {name: 'Users', href: '/'},
+		    {name: 'Notes', href: '/'},
 		    {name: 'Projects', href: '/projects'},
 		    {name: 'Todo', href: '/todos'},    
 		}
-		users: [],
+		notes: [],
 		projects: [],
 		project: {},
 		todos: [],
@@ -46,9 +46,9 @@ class App extends  React.Component {
 	}
 
 	componentDidMount() {
-		axios.get(get_url('users/')
+		axios.get(get_url('notes/')
 		.then(response => {
-			this.setState({users: response.data})
+			this.setState({notes: response.data})
 		}).catch(error => console.log(error))
 
 
