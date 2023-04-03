@@ -4,7 +4,9 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-} from "react-router-dom":
+	Redirect
+} from "react-router-dom";
+import axios from 'axios'
 import './bootstrap/css/bootstrap.min.css'
 import './bootstrap/css/sticky-footer-navbar.css'
 import Footer from './components/Footer.js'
@@ -32,9 +34,38 @@ class App extends  React.Component {
 		projects: [],
 		project: {},
 		todos: [],
+		auth: {username: '', is_login: false}
 	    }
 	}
 	
+	login(username, password) {
+		axios.post(get_url('token/', {username: username, password: password})
+			   .then(response => {
+			const result = response.data
+			const access = result.access
+			const refresh = result.refresh
+			localStorage.setItem('login', username)
+			localStorage.setItem('access', access)
+			localStorage.setItem('refresh', refresh)
+			this.setState({'auth': {username: username, is_login: true}})
+			this.load_data()
+		}).cath(error => { 
+		if (error.response.status === 401) {
+			alert('Неверный логин или пароль')
+		} else {
+			console.log(error)
+		}
+	     })
+         }
+			   
+	
+	logout() {
+		localStorage.setItem('login', '')
+		localStorage.setItem('access', '')
+		localStorage.setItem('refresh', '')
+		this.setState({'auth': {username: '', is_login: fslse}})
+	}
+			   
 	getProject(id) {
 		// console.log('call)
 		// console.log(get_url('/api/projects/${id}'))
@@ -44,6 +75,18 @@ class App extends  React.Component {
 			this.setState({project: response.data})
 		}).catch(error => consol.log(error))
 	}
+		
+		
+	load_data() {
+		let headers = {
+			'Content-Type': 'application/json'
+		}
+		if (this.state.auth.is_login) {
+			const token = localstorage.getItem('access)
+			headers['Authorization'] = 'Bearer' + token
+		}
+		
+		
 
 	componentDidMount() {
 		axios.get(get_url('notes/')
