@@ -20,4 +20,3 @@ class TestNoteViewSet(TestCase):
   def test_get_list(self):
     pass
   
-  
