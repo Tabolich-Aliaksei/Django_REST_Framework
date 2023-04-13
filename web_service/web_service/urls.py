@@ -28,3 +28,7 @@ urlpatterns = [
     path('api', include(router.urls)),
 
 ]
+
+path('swagger/',shema_view.with_ui('swagger')),
+     
+path('graphql/',GraphQLView.as_view(graphql=True))
