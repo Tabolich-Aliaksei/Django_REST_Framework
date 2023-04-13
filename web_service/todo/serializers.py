@@ -1,14 +1,11 @@
 from rest_framework.serializers import ModelSerializer, HyperlinkedIdentityField, HyperLinkedRelateField
 from .models import Project
 from .models import Todo
+from rest_framework.serializers import ModelSerializer
 
 
 class ProjectSerializer(ModelSerializer):
-  # Настройка сериализатора
-  # Настройка Foreign key
-  # owner = HyperlinkedIdentityField(view_name='user-detail')
-  # Настройка Many to many
-  # users = HyperlinkedRelateField(many=True, view_name='user-detail', read_only=True)
+
   
   class Meta:
     model = Project
