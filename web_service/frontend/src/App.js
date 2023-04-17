@@ -50,7 +50,7 @@ class App extends  React.Component {
 			this.setState({'auth': {username: username, is_login: true}})
 			this.load_data()
 		}).cath(error => { 
-		if (error.response.status === 401) {
+		if (error.response.status === 404) {
 			alert('Неверный логин или пароль')
 		} else {
 			console.log(error)
